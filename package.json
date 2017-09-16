@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/omeshomes/hackmit/issues"
   },
-  "homepage": "https://github.com/omeshomes/hackmit#readme"
+  "homepage": "https://github.com/omeshomes/hackmit#readme",
+  "dependencies": {
+    "@google-cloud/vision": "^0.12.0",
+    "node-cloud-vision-api": "^0.2.0"
+  }
 }
