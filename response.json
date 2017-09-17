@@ -1,0 +1,692 @@
+response = {
+    "playlists": {
+        "href": "https://api.spotify.com/v1/browse/categories/rock/playlists?offset=0&limit=20",
+        "items": [
+            {
+                "collaborative": false,
+                "external_urls": {
+                    "spotify": "http://open.spotify.com/user/spotify/playlist/37i9dQZF1DXcF6B6QPhFDv"
+                },
+                "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DXcF6B6QPhFDv",
+                "id": "37i9dQZF1DXcF6B6QPhFDv",
+                "images": [
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/89cac1fc9963ef3bf0ab8128b88ef518ce0a2fd2",
+                        "width": 300
+                    }
+                ],
+                "name": "Rock This",
+                "owner": {
+                    "display_name": "Spotify",
+                    "external_urls": {
+                        "spotify": "http://open.spotify.com/user/spotify"
+                    },
+                    "href": "https://api.spotify.com/v1/users/spotify",
+                    "id": "spotify",
+                    "type": "user",
+                    "uri": "spotify:user:spotify"
+                },
+                "public": null,
+                "snapshot_id": "14zAck/QPv+12mwp1ZnRBfmTl7JGwho4az4NTOBA2vSMg8wTkIgyIOLMTT/VASkP065s40GnNZY=",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DXcF6B6QPhFDv/tracks",
+                    "total": 61
+                },
+                "type": "playlist",
+                "uri": "spotify:user:spotify:playlist:37i9dQZF1DXcF6B6QPhFDv"
+            },
+            {
+                "collaborative": false,
+                "external_urls": {
+                    "spotify": "http://open.spotify.com/user/spotify/playlist/37i9dQZF1DX49jUV2NfGku"
+                },
+                "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DX49jUV2NfGku",
+                "id": "37i9dQZF1DX49jUV2NfGku",
+                "images": [
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/993ea43e0521938d5bf7a4fbe4f349acf6500975",
+                        "width": 300
+                    }
+                ],
+                "name": "Rock Solid",
+                "owner": {
+                    "display_name": "Spotify",
+                    "external_urls": {
+                        "spotify": "http://open.spotify.com/user/spotify"
+                    },
+                    "href": "https://api.spotify.com/v1/users/spotify",
+                    "id": "spotify",
+                    "type": "user",
+                    "uri": "spotify:user:spotify"
+                },
+                "public": null,
+                "snapshot_id": "TY+gs4GizL+Wjo/hqCky2b4x8odIFzkNwGhO6Gv3wIAbd88y4GMtJjtQT2pdrfxp5D0bIuCkWpY=",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DX49jUV2NfGku/tracks",
+                    "total": 50
+                },
+                "type": "playlist",
+                "uri": "spotify:user:spotify:playlist:37i9dQZF1DX49jUV2NfGku"
+            },
+            {
+                "collaborative": false,
+                "external_urls": {
+                    "spotify": "http://open.spotify.com/user/spotify/playlist/37i9dQZF1DX82GYcclJ3Ug"
+                },
+                "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DX82GYcclJ3Ug",
+                "id": "37i9dQZF1DX82GYcclJ3Ug",
+                "images": [
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/1c22c61ec8bd6eac23edcc2ca7e8563d063b7a62",
+                        "width": 300
+                    }
+                ],
+                "name": "Digging Now",
+                "owner": {
+                    "display_name": "Spotify",
+                    "external_urls": {
+                        "spotify": "http://open.spotify.com/user/spotify"
+                    },
+                    "href": "https://api.spotify.com/v1/users/spotify",
+                    "id": "spotify",
+                    "type": "user",
+                    "uri": "spotify:user:spotify"
+                },
+                "public": null,
+                "snapshot_id": "g6T1IY6TR+EoM/WeracvYQSfjZOWGDlFa/HKvN4IE77FkPdN/kJ7nnWvevG3cmqOZJcaaurcRyE=",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DX82GYcclJ3Ug/tracks",
+                    "total": 96
+                },
+                "type": "playlist",
+                "uri": "spotify:user:spotify:playlist:37i9dQZF1DX82GYcclJ3Ug"
+            },
+            {
+                "collaborative": false,
+                "external_urls": {
+                    "spotify": "http://open.spotify.com/user/spotify/playlist/37i9dQZF1DWT2jS7NwYPVI"
+                },
+                "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DWT2jS7NwYPVI",
+                "id": "37i9dQZF1DWT2jS7NwYPVI",
+                "images": [
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/102805d54b779f4da73b8af105bd3d0c0494274b",
+                        "width": 300
+                    }
+                ],
+                "name": "New Noise",
+                "owner": {
+                    "display_name": "Spotify",
+                    "external_urls": {
+                        "spotify": "http://open.spotify.com/user/spotify"
+                    },
+                    "href": "https://api.spotify.com/v1/users/spotify",
+                    "id": "spotify",
+                    "type": "user",
+                    "uri": "spotify:user:spotify"
+                },
+                "public": null,
+                "snapshot_id": "PYUgEwJoMJzpVjUkF5bDz3ISadWrDMbbPfG4baESz3ZAuDsXOsmwXRIXaID6aF4Xlwq//x6HoM8=",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DWT2jS7NwYPVI/tracks",
+                    "total": 143
+                },
+                "type": "playlist",
+                "uri": "spotify:user:spotify:playlist:37i9dQZF1DWT2jS7NwYPVI"
+            },
+            {
+                "collaborative": false,
+                "external_urls": {
+                    "spotify": "http://open.spotify.com/user/spotify/playlist/37i9dQZF1DWZn9s1LNKPiM"
+                },
+                "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DWZn9s1LNKPiM",
+                "id": "37i9dQZF1DWZn9s1LNKPiM",
+                "images": [
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/01639120fd1fc4ce269619e57e33e99d4f304a62",
+                        "width": 300
+                    }
+                ],
+                "name": "90s Rock Renaissance",
+                "owner": {
+                    "display_name": "Spotify",
+                    "external_urls": {
+                        "spotify": "http://open.spotify.com/user/spotify"
+                    },
+                    "href": "https://api.spotify.com/v1/users/spotify",
+                    "id": "spotify",
+                    "type": "user",
+                    "uri": "spotify:user:spotify"
+                },
+                "public": null,
+                "snapshot_id": "UPyCDb3ueofAewkWb2ync2ocsUw2pMoe400ndspF7W82KuLL9e9pdJO2AC8kR+I7aJ0OeZqQS+I=",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DWZn9s1LNKPiM/tracks",
+                    "total": 158
+                },
+                "type": "playlist",
+                "uri": "spotify:user:spotify:playlist:37i9dQZF1DWZn9s1LNKPiM"
+            },
+            {
+                "collaborative": false,
+                "external_urls": {
+                    "spotify": "http://open.spotify.com/user/spotify/playlist/37i9dQZF1DWSlJG7YPUBHF"
+                },
+                "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DWSlJG7YPUBHF",
+                "id": "37i9dQZF1DWSlJG7YPUBHF",
+                "images": [
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/257f5ecf855bb072e5d6df5ff63284c82dfc5f10",
+                        "width": 300
+                    }
+                ],
+                "name": "Legendary Guitar Solos",
+                "owner": {
+                    "display_name": "Spotify",
+                    "external_urls": {
+                        "spotify": "http://open.spotify.com/user/spotify"
+                    },
+                    "href": "https://api.spotify.com/v1/users/spotify",
+                    "id": "spotify",
+                    "type": "user",
+                    "uri": "spotify:user:spotify"
+                },
+                "public": null,
+                "snapshot_id": "S9pxIw8iWDK1ZgJ6QQBgnD1VShV/CCFGpr3FnZqkImhKkn42L6mumMfEIW05tN0EqkduZpbIgXg=",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DWSlJG7YPUBHF/tracks",
+                    "total": 30
+                },
+                "type": "playlist",
+                "uri": "spotify:user:spotify:playlist:37i9dQZF1DWSlJG7YPUBHF"
+            },
+            {
+                "collaborative": false,
+                "external_urls": {
+                    "spotify": "http://open.spotify.com/user/spotify/playlist/37i9dQZF1DX82Zzp6AKx64"
+                },
+                "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DX82Zzp6AKx64",
+                "id": "37i9dQZF1DX82Zzp6AKx64",
+                "images": [
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/7b4486ce742eedeb3aafb68aebd374ddf24b0294",
+                        "width": 300
+                    }
+                ],
+                "name": "Power Ballads",
+                "owner": {
+                    "display_name": "Spotify",
+                    "external_urls": {
+                        "spotify": "http://open.spotify.com/user/spotify"
+                    },
+                    "href": "https://api.spotify.com/v1/users/spotify",
+                    "id": "spotify",
+                    "type": "user",
+                    "uri": "spotify:user:spotify"
+                },
+                "public": null,
+                "snapshot_id": "6B17+/ZRPMtFjz6I/0CmZ/nMnVZw6eKIQrSFQGfzs4TWFBigeOKLZeuM3HtHtRA2/E+rshUC5Is=",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DX82Zzp6AKx64/tracks",
+                    "total": 50
+                },
+                "type": "playlist",
+                "uri": "spotify:user:spotify:playlist:37i9dQZF1DX82Zzp6AKx64"
+            },
+            {
+                "collaborative": false,
+                "external_urls": {
+                    "spotify": "http://open.spotify.com/user/spotify/playlist/37i9dQZF1DX3YMp9n8fkNx"
+                },
+                "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DX3YMp9n8fkNx",
+                "id": "37i9dQZF1DX3YMp9n8fkNx",
+                "images": [
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/e8e4d790c35462f712e7d34bae0a0e4f1ad82ece",
+                        "width": 300
+                    }
+                ],
+                "name": "90s Pop Rock Essentials",
+                "owner": {
+                    "display_name": "Spotify",
+                    "external_urls": {
+                        "spotify": "http://open.spotify.com/user/spotify"
+                    },
+                    "href": "https://api.spotify.com/v1/users/spotify",
+                    "id": "spotify",
+                    "type": "user",
+                    "uri": "spotify:user:spotify"
+                },
+                "public": null,
+                "snapshot_id": "O4Cp3+Sq9NAKrHPiA3iXYz1VShV/CCFGF/C0KEwty/ZuhxJbhMhS2ouYw3FOe3RUCvRSPoD+EHI=",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DX3YMp9n8fkNx/tracks",
+                    "total": 100
+                },
+                "type": "playlist",
+                "uri": "spotify:user:spotify:playlist:37i9dQZF1DX3YMp9n8fkNx"
+            },
+            {
+                "collaborative": false,
+                "external_urls": {
+                    "spotify": "http://open.spotify.com/user/spotify/playlist/37i9dQZF1DX11ghcIxjcjE"
+                },
+                "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DX11ghcIxjcjE",
+                "id": "37i9dQZF1DX11ghcIxjcjE",
+                "images": [
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/3f15a993a223f739b6e9402a30e62f38edee1898",
+                        "width": 300
+                    }
+                ],
+                "name": "Grunge Forever",
+                "owner": {
+                    "display_name": "Spotify",
+                    "external_urls": {
+                        "spotify": "http://open.spotify.com/user/spotify"
+                    },
+                    "href": "https://api.spotify.com/v1/users/spotify",
+                    "id": "spotify",
+                    "type": "user",
+                    "uri": "spotify:user:spotify"
+                },
+                "public": null,
+                "snapshot_id": "f71iE9WjeOwSQV+Puxg94WmYR7cMZqnlJjUX1MKSeXTzvwfmcGUndm5517uHKvJr37dxiyrCXlI=",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DX11ghcIxjcjE/tracks",
+                    "total": 70
+                },
+                "type": "playlist",
+                "uri": "spotify:user:spotify:playlist:37i9dQZF1DX11ghcIxjcjE"
+            },
+            {
+                "collaborative": false,
+                "external_urls": {
+                    "spotify": "http://open.spotify.com/user/spotify/playlist/37i9dQZF1DWSDoVybeQisg"
+                },
+                "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DWSDoVybeQisg",
+                "id": "37i9dQZF1DWSDoVybeQisg",
+                "images": [
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/539d8f61c37764d6b70f0fd48165a219faf155d8",
+                        "width": 300
+                    }
+                ],
+                "name": "Psychedelic Rock",
+                "owner": {
+                    "display_name": "Spotify",
+                    "external_urls": {
+                        "spotify": "http://open.spotify.com/user/spotify"
+                    },
+                    "href": "https://api.spotify.com/v1/users/spotify",
+                    "id": "spotify",
+                    "type": "user",
+                    "uri": "spotify:user:spotify"
+                },
+                "public": null,
+                "snapshot_id": "kpP6zJb0bvQbQeaDNibFWD1VShV/CCFGJHuP2QW2s12brTvJ4zIJh7Cyw4+bPKJlbMji7MX17Hk=",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DWSDoVybeQisg/tracks",
+                    "total": 40
+                },
+                "type": "playlist",
+                "uri": "spotify:user:spotify:playlist:37i9dQZF1DWSDoVybeQisg"
+            },
+            {
+                "collaborative": false,
+                "external_urls": {
+                    "spotify": "http://open.spotify.com/user/spotify/playlist/37i9dQZF1DX0xLQsW8b5Zx"
+                },
+                "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DX0xLQsW8b5Zx",
+                "id": "37i9dQZF1DX0xLQsW8b5Zx",
+                "images": [
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/14e09828469bddffc921292dc2860343da54258c",
+                        "width": 300
+                    }
+                ],
+                "name": "Rockabilly Mania",
+                "owner": {
+                    "display_name": "Spotify",
+                    "external_urls": {
+                        "spotify": "http://open.spotify.com/user/spotify"
+                    },
+                    "href": "https://api.spotify.com/v1/users/spotify",
+                    "id": "spotify",
+                    "type": "user",
+                    "uri": "spotify:user:spotify"
+                },
+                "public": null,
+                "snapshot_id": "e5U8A+EvZThv23VilaXjOFGKU85deBxy0ejYWWLFQGmfOqTUdiEiZSc39KPBGkt5+C8AX+yCSzA=",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DX0xLQsW8b5Zx/tracks",
+                    "total": 70
+                },
+                "type": "playlist",
+                "uri": "spotify:user:spotify:playlist:37i9dQZF1DX0xLQsW8b5Zx"
+            },
+            {
+                "collaborative": false,
+                "external_urls": {
+                    "spotify": "http://open.spotify.com/user/spotify/playlist/37i9dQZF1DX8FwnYE6PRvL"
+                },
+                "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DX8FwnYE6PRvL",
+                "id": "37i9dQZF1DX8FwnYE6PRvL",
+                "images": [
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/815a511cd730bc281c04227277fd6dd44c84f4df",
+                        "width": 300
+                    }
+                ],
+                "name": "Rock Party",
+                "owner": {
+                    "display_name": "Spotify",
+                    "external_urls": {
+                        "spotify": "http://open.spotify.com/user/spotify"
+                    },
+                    "href": "https://api.spotify.com/v1/users/spotify",
+                    "id": "spotify",
+                    "type": "user",
+                    "uri": "spotify:user:spotify"
+                },
+                "public": null,
+                "snapshot_id": "RTpnJ8om3WaGzINopoorqeu+Hj23YzpKWHYD2cNSiQ4wXd+DHMdFY4xMam6mQpISDeLtD288jB0=",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DX8FwnYE6PRvL/tracks",
+                    "total": 107
+                },
+                "type": "playlist",
+                "uri": "spotify:user:spotify:playlist:37i9dQZF1DX8FwnYE6PRvL"
+            },
+            {
+                "collaborative": false,
+                "external_urls": {
+                    "spotify": "http://open.spotify.com/user/spotify/playlist/37i9dQZF1DXd0ZFXhY0CRF"
+                },
+                "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DXd0ZFXhY0CRF",
+                "id": "37i9dQZF1DXd0ZFXhY0CRF",
+                "images": [
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/dc961c6309c7a2fcf7685f450637ce59a44f63a8",
+                        "width": 300
+                    }
+                ],
+                "name": "Women of Rock",
+                "owner": {
+                    "display_name": "Spotify",
+                    "external_urls": {
+                        "spotify": "http://open.spotify.com/user/spotify"
+                    },
+                    "href": "https://api.spotify.com/v1/users/spotify",
+                    "id": "spotify",
+                    "type": "user",
+                    "uri": "spotify:user:spotify"
+                },
+                "public": null,
+                "snapshot_id": "9p562ZPZfoTgDAlChlDfhltCkfjH71x1VH9TyY6YvSjLO1ymFwfP00C2Np9SAVBTgxdIe/BdG24=",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DXd0ZFXhY0CRF/tracks",
+                    "total": 120
+                },
+                "type": "playlist",
+                "uri": "spotify:user:spotify:playlist:37i9dQZF1DXd0ZFXhY0CRF"
+            },
+            {
+                "collaborative": false,
+                "external_urls": {
+                    "spotify": "http://open.spotify.com/user/spotify/playlist/37i9dQZF1DXbDjX0hus3Iu"
+                },
+                "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DXbDjX0hus3Iu",
+                "id": "37i9dQZF1DXbDjX0hus3Iu",
+                "images": [
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/611295c041fb5a6c278e002461fd83854dd8d124",
+                        "width": 300
+                    }
+                ],
+                "name": "It's a Southern Thing",
+                "owner": {
+                    "display_name": "Spotify",
+                    "external_urls": {
+                        "spotify": "http://open.spotify.com/user/spotify"
+                    },
+                    "href": "https://api.spotify.com/v1/users/spotify",
+                    "id": "spotify",
+                    "type": "user",
+                    "uri": "spotify:user:spotify"
+                },
+                "public": null,
+                "snapshot_id": "dYM477ThPsxFx5rlzQWguHzj/XVZYKwHKha/EIF5zK26H/Z9FHyzNMEyYqoa78dfjfKQqLpOxaI=",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DXbDjX0hus3Iu/tracks",
+                    "total": 54
+                },
+                "type": "playlist",
+                "uri": "spotify:user:spotify:playlist:37i9dQZF1DXbDjX0hus3Iu"
+            },
+            {
+                "collaborative": false,
+                "external_urls": {
+                    "spotify": "http://open.spotify.com/user/spotify/playlist/37i9dQZF1DWWGFQLoP9qlv"
+                },
+                "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DWWGFQLoP9qlv",
+                "id": "37i9dQZF1DWWGFQLoP9qlv",
+                "images": [
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/063faa2d1a3ff9c38e4c1911ceb453885b28979b",
+                        "width": 300
+                    }
+                ],
+                "name": "Legendary",
+                "owner": {
+                    "display_name": "Spotify",
+                    "external_urls": {
+                        "spotify": "http://open.spotify.com/user/spotify"
+                    },
+                    "href": "https://api.spotify.com/v1/users/spotify",
+                    "id": "spotify",
+                    "type": "user",
+                    "uri": "spotify:user:spotify"
+                },
+                "public": null,
+                "snapshot_id": "GVwF53PJgA2Z2xCQJ4YZBWmjK5uagxIauT49C2tFDlkJ5V2O/eI6FbpHg/7E1E6MA9FVaQBeb9A=",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DWWGFQLoP9qlv/tracks",
+                    "total": 122
+                },
+                "type": "playlist",
+                "uri": "spotify:user:spotify:playlist:37i9dQZF1DWWGFQLoP9qlv"
+            },
+            {
+                "collaborative": false,
+                "external_urls": {
+                    "spotify": "http://open.spotify.com/user/spotify/playlist/37i9dQZF1DX6j6TEp70WNZ"
+                },
+                "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DX6j6TEp70WNZ",
+                "id": "37i9dQZF1DX6j6TEp70WNZ",
+                "images": [
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/2110e04e67f26ca3c13b4a0392c85c054f9934cc",
+                        "width": 300
+                    }
+                ],
+                "name": "Rock United",
+                "owner": {
+                    "display_name": "Spotify",
+                    "external_urls": {
+                        "spotify": "http://open.spotify.com/user/spotify"
+                    },
+                    "href": "https://api.spotify.com/v1/users/spotify",
+                    "id": "spotify",
+                    "type": "user",
+                    "uri": "spotify:user:spotify"
+                },
+                "public": null,
+                "snapshot_id": "8c8jyKbbQeGN/pmJhLrxQMzIRjl9qD8br1I48VNh9ma1raKhdOqBiUxuhgsGptc072QfZ9EjEa4=",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DX6j6TEp70WNZ/tracks",
+                    "total": 50
+                },
+                "type": "playlist",
+                "uri": "spotify:user:spotify:playlist:37i9dQZF1DX6j6TEp70WNZ"
+            },
+            {
+                "collaborative": false,
+                "external_urls": {
+                    "spotify": "http://open.spotify.com/user/spotify/playlist/37i9dQZF1DWXs1L3AC0Xio"
+                },
+                "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DWXs1L3AC0Xio",
+                "id": "37i9dQZF1DWXs1L3AC0Xio",
+                "images": [
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/2f4845677490a85408fdda1f232d320c20960be5",
+                        "width": 300
+                    }
+                ],
+                "name": "Rock Ballads",
+                "owner": {
+                    "display_name": "Spotify",
+                    "external_urls": {
+                        "spotify": "http://open.spotify.com/user/spotify"
+                    },
+                    "href": "https://api.spotify.com/v1/users/spotify",
+                    "id": "spotify",
+                    "type": "user",
+                    "uri": "spotify:user:spotify"
+                },
+                "public": null,
+                "snapshot_id": "ffqmKnaYx7wx86d0hzBr3Stp7sv2M7bsofk0ede/PudYZzCKK7StOkwb+Y+dTKZrDXhr7nYmT+c=",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DWXs1L3AC0Xio/tracks",
+                    "total": 70
+                },
+                "type": "playlist",
+                "uri": "spotify:user:spotify:playlist:37i9dQZF1DWXs1L3AC0Xio"
+            },
+            {
+                "collaborative": false,
+                "external_urls": {
+                    "spotify": "http://open.spotify.com/user/spotify/playlist/37i9dQZF1DX6ujZpAN0v9r"
+                },
+                "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DX6ujZpAN0v9r",
+                "id": "37i9dQZF1DX6ujZpAN0v9r",
+                "images": [
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/52c80286e1ad0ce2fcc2750c43a2a770c242eef3",
+                        "width": 300
+                    }
+                ],
+                "name": "Epic Wall of Sound",
+                "owner": {
+                    "display_name": "Spotify",
+                    "external_urls": {
+                        "spotify": "http://open.spotify.com/user/spotify"
+                    },
+                    "href": "https://api.spotify.com/v1/users/spotify",
+                    "id": "spotify",
+                    "type": "user",
+                    "uri": "spotify:user:spotify"
+                },
+                "public": null,
+                "snapshot_id": "ggS39LdfbMHChqC1FFAhR06oOaaMlcdHNQj3YTCMHpZKbFJ+FTpLKRuVbTgnKnEm1Cp9C404EoI=",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DX6ujZpAN0v9r/tracks",
+                    "total": 50
+                },
+                "type": "playlist",
+                "uri": "spotify:user:spotify:playlist:37i9dQZF1DX6ujZpAN0v9r"
+            },
+            {
+                "collaborative": false,
+                "external_urls": {
+                    "spotify": "http://open.spotify.com/user/spotify/playlist/37i9dQZF1DX9efMEVbsVa2"
+                },
+                "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DX9efMEVbsVa2",
+                "id": "37i9dQZF1DX9efMEVbsVa2",
+                "images": [
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/4c9535e6ab6a4b78e7b35f42f750c07e1ef70d12",
+                        "width": 300
+                    }
+                ],
+                "name": "This Is: Holger Czukay",
+                "owner": {
+                    "display_name": "Spotify",
+                    "external_urls": {
+                        "spotify": "http://open.spotify.com/user/spotify"
+                    },
+                    "href": "https://api.spotify.com/v1/users/spotify",
+                    "id": "spotify",
+                    "type": "user",
+                    "uri": "spotify:user:spotify"
+                },
+                "public": null,
+                "snapshot_id": "eZ1V0jTadDWp/2NKCqp6vZ/ivLzodCks6w7aeWVBXSTPFPe6qocxSzCFk5YRAseLIdw2mqBL8xM=",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DX9efMEVbsVa2/tracks",
+                    "total": 34
+                },
+                "type": "playlist",
+                "uri": "spotify:user:spotify:playlist:37i9dQZF1DX9efMEVbsVa2"
+            },
+            {
+                "collaborative": false,
+                "external_urls": {
+                    "spotify": "http://open.spotify.com/user/spotify/playlist/37i9dQZF1DXbR32Ldau7WM"
+                },
+                "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DXbR32Ldau7WM",
+                "id": "37i9dQZF1DXbR32Ldau7WM",
+                "images": [
+                    {
+                        "height": 300,
+                        "url": "https://i.scdn.co/image/6e6f25b30653e0daa473c1d2aa564446e13eb917",
+                        "width": 300
+                    }
+                ],
+                "name": "Big In Japan",
+                "owner": {
+                    "display_name": "Spotify",
+                    "external_urls": {
+                        "spotify": "http://open.spotify.com/user/spotify"
+                    },
+                    "href": "https://api.spotify.com/v1/users/spotify",
+                    "id": "spotify",
+                    "type": "user",
+                    "uri": "spotify:user:spotify"
+                },
+                "public": null,
+                "snapshot_id": "Pwg2Bmb3JKaoPN+8/MHVPOu+Hj23YzpKPaLn3TL2D1SnVsvSh37tZgaPv6OiizZgKdarrsd2Ths=",
+                "tracks": {
+                    "href": "https://api.spotify.com/v1/users/spotify/playlists/37i9dQZF1DXbR32Ldau7WM/tracks",
+                    "total": 50
+                },
+                "type": "playlist",
+                "uri": "spotify:user:spotify:playlist:37i9dQZF1DXbR32Ldau7WM"
+            }
+        ],
+        "limit": 20,
+        "next": "https://api.spotify.com/v1/browse/categories/rock/playlists?offset=20&limit=20",
+        "offset": 0,
+        "previous": null,
+        "total": 23
+    }
+}
