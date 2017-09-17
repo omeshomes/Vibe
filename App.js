@@ -8,11 +8,11 @@ import { StyleSheet,
         Image,
         StatusBar,
         Button,
-        } from 'react-native';
+        WebView } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { ImagePicker } from 'expo';
 import { StackNavigator } from 'react-navigation';
-// import Axios from 'axios';
+import axios from 'axios';
 
 let IMAGE = null;
 
@@ -23,18 +23,51 @@ class SongPlayer extends React.Component {
     this.state = {
       currentSong: {},
       isPlaying: false,
-      image: IMAGE
+      image: IMAGE,
+
+      interval: {},
+
+      spotify_token: '',
+      spotify_client_id: 'MGIxMWJmMWRkY2FmNGJiNmI5MzY4ODFjZDViYzAzNGI6NmM1YTIwNTE3M2QwNDFjZjkwZTdhNTA1NTc3MzNkNGM'
     };
 
     this.getSong = this._getSong.bind(this);
     this.playSong = this._playSong.bind(this);
     this.pauseSong = this._pauseSong.bind(this);
-    this.pickImage = this._pickImage.bind(this);
+    this.getUpdatedSpotifyToken = this._getUpdatedSpotifyToken.bind(this);
   }
 
   /* BUG CHANGE LATER TO NOT HARD CODE THIS FUNC CALL BUG */
   componentDidMount() {
     this.getSong();
+
+    console.log('*******************************');
+    /* url: https://accounts.spotify.com/api/token
+    Headers: { Authorization: Basic MGIxMWJmMWRkY2FmNGJiNmI5MzY4ODFjZDViYzAzNGI6NmM1YTIwNTE3M2QwNDFjZjkwZTdhNTA1NTc3MzNkNGM=, Content-Type: application/x-www-form-urlencoded}
+    Body: grant_type: client_credentials
+    sample response: {
+        "access_token": "BQAm6q1inoYkQBFtFXkcx2CVyC3nrqvIm999vPIiQzmolAVktrRaW-Utpp3jDctiSDVkn640Foc_UtbExCljpg",
+        "token_type": "Bearer",
+        "expires_in": 3600 */
+    this.getUpdatedSpotifyToken();
+
+    this.setState({interval: setInterval(() => {
+        this.getUpdatedSpotifyToken();
+      }, 3600 * 1000)
+    });
+
+  }
+
+  _getUpdatedSpotifyToken () {
+    const auth_url = 'https://accounts.spotify.com/api/token'+this.state.spotify_client_id;
+    console.log('making post request to auth_url', auth_url);
+    axios.post(auth_url)
+    .then(resp => {
+      console.log('POST REQUEST WENT THROUGH!!', resp);
+    })
+    .catch(err => {
+      console.log('post req not go through :( ,', err);
+    });
   }
   /* BUG CHANGE LATER TO NOT HARD CODE ABOVE FUNC CALL BUG */
 
@@ -63,9 +96,13 @@ class SongPlayer extends React.Component {
     return (
       <View style={styles.container}>
         <MyStatusBar backgroundColor="black" barStyle="light-content" />
+
+        {/* <iframe src="demo_iframe.htm" height="200" width="300"></iframe> */}
+
+        <WebView src="demo_iframe.htm" height="200" width="300"></WebView>
+
         {/* image picker and camera  */}
         <View style={styles.imagecontainer}>
-
           {this.state.image &&
             <Image source={{ uri: this.state.image }} style={{ width: 200, height: 200 }} />}
         </View>
@@ -110,6 +147,14 @@ class PicPicker extends React.Component {
 
     this.pickImage = this._pickImage.bind(this);
   }
+  //
+  // componentDidMount() {
+  //   axios.get(`http://api.openweathermap.org/data/2.5/weather?q=LasVegas&units=imperial&APPID=89fdd5afd3758c1feb06e06a64c55260`)
+  //   .then ( data => {
+  //     console.log('axios request worked! ', data);
+  //   })
+  //
+  // }
 
   _pickImage = async () => {
     let result;
@@ -150,7 +195,7 @@ export default StackNavigator({
   SongPlayer: {
     screen: SongPlayer,
   },
-}, {initialRouteName: 'PicPicker'});
+}, {initialRouteName: 'SongPlayer'});
 
 // LOCAL COMPONENTS AND styles
 
