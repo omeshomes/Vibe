@@ -17,9 +17,9 @@ import axios from 'axios';
 import qs from 'querystring';
 import Iframe from 'react-iframe';
 
-import vision from "react-cloud-vision-api";
-vision.init({ auth: 'Basic AIzaSyCHn4oIcmIftU7mEaWtNOXLM7G02wCxOhU'})
-console.log('worked');
+// import vision from "react-cloud-vision-api";
+// vision.init({ auth: 'Basic AIzaSyCHn4oIcmIftU7mEaWtNOXLM7G02wCxOhU'})
+// console.log('worked');
 
 let IMAGE = null;
 
@@ -38,7 +38,7 @@ class SongPlayer extends React.Component {
 
       time: 5,
 
-      spotify_token: 'Bearer BQCCsslW6gFO8rHDLeFD-6yjD3IIOEh9bjMgkWiEumu98bcjehpYZVANN5czEiB7DU5d1k-svGdn1lwIlgv9Eg',
+      spotify_token: 'Bearer BQDsP1cqZLlS9MkCN8dJdgzwa1Uh9FXk9zA8raQvR-ePYLMtTC0uIUWCwoclRJyEkeMtHyJqgx-4PbP3POSmXg',
       spotify_client_id: 'MGIxMWJmMWRkY2FmNGJiNmI5MzY4ODFjZDViYzAzNGI6NmM1YTIwNTE3M2QwNDFjZjkwZTdhNTA1NTc3MzNkNGM'
     };
 
@@ -141,10 +141,12 @@ class SongPlayer extends React.Component {
       }
     })
     .then(resp => {
-      console.log('GET REQUEST WENT THROUGH!!', resp.data.playlists.items[2]);
+      console.log('GET REQUEST WENT THROUGH!!', resp.data.playlists.items);
+      const num = Math.floor(Math.random() * 3) + 1;
+
       const defaultPlaylistUri = 'spotify:user:spotify:playlist:37i9dQZF1DXcF6B6QPhFDv';
       const playlist = (resp.data && resp.data.playlists && resp.data.playlists.items) ?
-        resp.data.playlists.items[2] : null;
+        resp.data.playlists.items[num] : null;
 
       let playlistUri = 'http://open.spotify.com/embed?uri=';
       playlistUri += playlist ? playlist.external_urls.spotify : defaultPlaylistUri;
@@ -187,7 +189,7 @@ class SongPlayer extends React.Component {
 
     return (
       <View style={styles.container}>
-        <MyStatusBar backgroundColor="black" barStyle="light-content" />
+        <MyStatusBar backgroundColor="white" barStyle="light-content" />
 
         {/* song title and info  */}
         <View style={styles.textcontainer}>
@@ -250,10 +252,24 @@ class PicPicker extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-         <Button
-          title="Choose an image..."
-          onPress={this._pickImage}
-        />
+        <View style={styles.flex}>
+          <Text style={styles.textpic}>
+            Your perfect Playlist
+          </Text>
+          <Text style={styles.textpic}>
+            for right here,
+          </Text>
+          <Text style={styles.textpic}>
+            right now
+          </Text>
+        </View><View>
+          <Button
+           title="Choose an image..."
+           onPress={this._pickImage}
+           style={styles.picbtn}
+         />
+        </View>
+
       </View>
     )
   }
@@ -293,17 +309,22 @@ const styles = StyleSheet.create({
     marginBottom: '5%',
   },
   textqueue: {
-    color: 'grey',
+    color: 'white',
     fontSize: 18,
     margin: '2%'
   },
   textTitle: {
-    color: 'grey',
+    color: 'white',
     fontSize: 25,
   },
   textArtist: {
-    color: 'grey',
+    color: 'white',
     fontSize: 15
+  },
+  textpic: {
+    color: 'white',
+    fontSize: 15,
+    textDecoration: 'italic'
   },
   btncontainer: {
     display: 'flex',
@@ -340,7 +361,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-
+  picbtn: {
+    marginTop: '8%'
+  },
+  flex: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 });
 
 
