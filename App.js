@@ -7,19 +7,23 @@ import { StyleSheet,
         Platform,
         Image,
         StatusBar,
+        Button,
         } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { ImagePicker } from 'expo';
+import { StackNavigator } from 'react-navigation';
 // import Axios from 'axios';
 
-export default class App extends React.Component {
+let IMAGE = null;
+
+class SongPlayer extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       currentSong: {},
       isPlaying: false,
-      image: null
+      image: IMAGE
     };
 
     this.getSong = this._getSong.bind(this);
@@ -52,20 +56,8 @@ export default class App extends React.Component {
 
   _pauseSong() {
     console.log("pausing song!");
+
   }
-
-  _pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      allowsEditing: true,
-      aspect: [4, 3],
-    });
-
-    console.log(result);
-
-    if (!result.cancelled) {
-      this.setState({ image: result.uri });
-    }
-  };
 
   render() {
     return (
@@ -73,17 +65,14 @@ export default class App extends React.Component {
         <MyStatusBar backgroundColor="black" barStyle="light-content" />
         {/* image picker and camera  */}
         <View style={styles.imagecontainer}>
-          <Button
-            title="Pick an image from camera roll"
-            onPress={this._pickImage}
-          />
+
           {this.state.image &&
-            <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+            <Image source={{ uri: this.state.image }} style={{ width: 200, height: 200 }} />}
         </View>
         {/* song title and info  */}
         <View style={styles.textcontainer}>
-          <Text style={styles.text}> {(this.state.song && this.state.song.title) || ''} </Text>
-          <Text style={styles.text}> by {(this.state.song && this.state.song.artist) || ''} </Text>
+          <Text style={styles.textTitle}> {(this.state.song && this.state.song.title) || ''} </Text>
+          <Text style={styles.textArtist}> by {(this.state.song && this.state.song.artist) || ''} </Text>
         </View>
         {/* song play/pause buttons  */}
         <View style={styles.btncontainer}>
@@ -94,7 +83,7 @@ export default class App extends React.Component {
               <Icon
                 reverse
                 name='play-arrow'
-                color='grey'
+                color='rgb(97, 99, 104)'
                 size={15}
               />
           </TouchableOpacity>
@@ -105,7 +94,7 @@ export default class App extends React.Component {
               <Icon
                 reverse
                 name='pause'
-                color='rgb(0,0,0)'
+                color='rgb(97, 99, 104)'
                 size={15}
               />
           </TouchableOpacity>
@@ -114,6 +103,56 @@ export default class App extends React.Component {
     );
   }
 }
+
+class PicPicker extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.pickImage = this._pickImage.bind(this);
+  }
+
+  _pickImage = async () => {
+    let result;
+
+    try {
+      result = await ImagePicker.launchImageLibraryAsync({
+        allowsEditing: true,
+        aspect: [4, 3],
+      });
+
+      // this.setState({ image: result.uri });
+      IMAGE = result.uri;
+    } catch (err) {
+      console.log('could not load pic: ', err);
+
+    }
+
+    console.log(result);
+  };
+
+  render () {
+    return (
+      <View style={styles.container}>
+        <Button
+          title="Pick an image from camera roll"
+          onPress={this._pickImage}
+        />
+      </View>
+    )
+  }
+
+}
+
+export default StackNavigator({
+  PicPicker: {
+    screen: PicPicker,
+  },
+  SongPlayer: {
+    screen: SongPlayer,
+  },
+}, {initialRouteName: 'PicPicker'});
+
+// LOCAL COMPONENTS AND styles
 
 const MyStatusBar = ({backgroundColor, ...props}) => (
   <View style={[styles.statusBar, { backgroundColor }]}>
@@ -130,6 +169,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   textcontainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+
     overflow: 'scroll',
     marginBottom: '5%',
   },
@@ -137,10 +180,12 @@ const styles = StyleSheet.create({
     color: 'grey',
   },
   textTitle: {
+    color: 'grey',
     fontSize: 25,
   },
   textArtist: {
-    fontSize: 20
+    color: 'grey',
+    fontSize: 15
   },
   btncontainer: {
     display: 'flex',
@@ -169,4 +214,12 @@ const styles = StyleSheet.create({
   statusBar: {
     height: STATUSBAR_HEIGHT,
   },
+  imagecontainer: {
+    margin: '2%',
+
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
 });
