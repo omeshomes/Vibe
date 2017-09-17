@@ -1,3 +1,4 @@
+import 'expo';
 import React from 'react';
 import { StyleSheet,
         Text,
@@ -6,9 +7,10 @@ import { StyleSheet,
         Platform,
         Image,
         StatusBar,
-        ImagePicker} from 'react-native';
+        } from 'react-native';
 import { Icon } from 'react-native-elements';
-import Axios from 'axios';
+import { ImagePicker } from 'expo';
+// import Axios from 'axios';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -16,12 +18,14 @@ export default class App extends React.Component {
 
     this.state = {
       currentSong: {},
-      isPlaying: false
+      isPlaying: false,
+      image: null
     };
 
-    this.getSong = this.getSong.bind(this);
-    this.playSong = this.playSong.bind(this);
-    this.pauseSong = this.pauseSong.bind(this);
+    this.getSong = this._getSong.bind(this);
+    this.playSong = this._playSong.bind(this);
+    this.pauseSong = this._pauseSong.bind(this);
+    this.pickImage = this._pickImage.bind(this);
   }
 
   /* BUG CHANGE LATER TO NOT HARD CODE THIS FUNC CALL BUG */
@@ -30,8 +34,7 @@ export default class App extends React.Component {
   }
   /* BUG CHANGE LATER TO NOT HARD CODE ABOVE FUNC CALL BUG */
 
-  getS
-  ong() {
+  _getSong() {
     console.log("getting song");
 
     /* BUG CHANGE LATER TO NOT HARD CODE THESE VARS BUG */
@@ -42,34 +45,52 @@ export default class App extends React.Component {
     this.setState({song: { title , artist }})
   }
 
-  playSong() {
+  _playSong() {
     console.log("playing song!");
 
   }
 
-  pauseSong() {
+  _pauseSong() {
     console.log("pausing song!");
   }
+
+  _pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [4, 3],
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      this.setState({ image: result.uri });
+    }
+  };
 
   render() {
     return (
       <View style={styles.container}>
         <MyStatusBar backgroundColor="black" barStyle="light-content" />
-
+        {/* image picker and camera  */}
+        <View style={styles.imagecontainer}>
+          <Button
+            title="Pick an image from camera roll"
+            onPress={this._pickImage}
+          />
+          {this.state.image &&
+            <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+        </View>
+        {/* song title and info  */}
         <View style={styles.textcontainer}>
           <Text style={styles.text}> {(this.state.song && this.state.song.title) || ''} </Text>
           <Text style={styles.text}> by {(this.state.song && this.state.song.artist) || ''} </Text>
         </View>
+        {/* song play/pause buttons  */}
         <View style={styles.btncontainer}>
           <TouchableOpacity
             id="playbtn"
             onPress={() => this.playSong()}
             style={styles.btn}>
-              {/* <Text style={styles.playtext}>Play</Text> */}
-              {/* <Image
-                style={styles.btnimg}
-                source={require('./pics/play.png')}
-              /> */}
               <Icon
                 reverse
                 name='play-arrow'
@@ -81,11 +102,6 @@ export default class App extends React.Component {
             id="pausebtn"
             onPress={() => this.pauseSong()}
             style={styles.btn}>
-              {/* <Text style=/{styles.playtext}>Pause</Text> */}
-              {/* <Image
-                style={styles.btnimg}
-                source={require('./pics/pause.png')}
-              /> */}
               <Icon
                 reverse
                 name='pause'
@@ -94,10 +110,6 @@ export default class App extends React.Component {
               />
           </TouchableOpacity>
         </View>
-
-
-
-
       </View>
     );
   }
