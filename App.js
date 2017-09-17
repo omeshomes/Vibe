@@ -8,14 +8,15 @@ import { StyleSheet,
         Image,
         StatusBar,
         Button,
+        Linking
         } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { ImagePicker } from 'expo';
 import { StackNavigator } from 'react-navigation';
 
-import vision from "react-cloud-vision-api";
-vision.init({ auth: 'AIzaSyCHn4oIcmIftU7mEaWtNOXLM7G02wCxOhU'})
-console.log('worked');
+// import vision from "node-cloud-vision-api";
+// vision.init({ auth: 'AIzaSyCHn4oIcmIftU7mEaWtNOXLM7G02wCxOhU'})
+// console.log('worked');
 // google.auth.getApplicationDefault(function(err, authClient) {
 //     if (err) {
 //       return cb(err);
@@ -49,6 +50,7 @@ class SongPlayer extends React.Component {
   _getSong() {
     console.log("getting song");
 
+
     /* BUG CHANGE LATER TO NOT HARD CODE THESE VARS BUG */
     const title = 'On Top of the World';
     const artist = 'Imagine Dragons';
@@ -59,6 +61,8 @@ class SongPlayer extends React.Component {
 
   _playSong() {
     console.log("playing song!");
+    Linking.openURL('https://open.spotify.com/album/3cyyJALrHc8LawnQNFYRWL')
+    .catch(err => console.error('An error occurred', err));
 
   }
 
@@ -134,40 +138,37 @@ class PicPicker extends React.Component {
       // this.setState({ image: result.uri });
       IMAGE = result.uri;
 
-      // Performs label detection on the image file
-      console.log('a');
-      const req = new vision.Request({
-        image: new vision.Image({
-          base64: result.uri
-        }),
-        features: [
-          new vision.Feature('TEXT_DETECTION', 4),
-          new vision.Feature('LABEL_DETECTION', 10),
-        ]
-      })
+      // // Performs label detection on the image file
+      // console.log('a');
+      // const req = new vision.Request({
+      //   image: new vision.Image(result.uri),
+      //   features: [
+      //     new vision.Feature('LABEL_DETECTION', 10),
+      //   ]
+      // })
 
-      console.log('b', req);
+      // console.log('b', req);
 
-      vision.annotate(req).then((res) => {
-        // handling response
-        console.log('hello');
-        console.log(JSON.stringify(res.responses))
-      }, (e) => {
-        console.log('Error: ', e)
-      })
+      // vision.annotate(req).then((res) => {
+      //   // handling response
+      //   console.log('hello');
+      //   console.log(JSON.stringify(res.responses))
+      // }).catch((err) => {
+      //   console.log('Error: ', err);
+      // })
 
-      // vision.labelDetection(request)
-      //   .then((results) => {
-      //     const labels = results[0].labelAnnotations;
+      // // vision.labelDetection(request)
+      // //   .then((results) => {
+      // //     const labels = results[0].labelAnnotations;
 
-      //     console.log('Labels:');
-      //     labels.forEach((label) => console.log(label.description));
-      //   })
-      //   .catch((err) => {
-      //     console.error('ERROR:', err);
-      //   });
+      // //     console.log('Labels:');
+      // //     labels.forEach((label) => console.log(label.description));
+      // //   })
+      // //   .catch((err) => {
+      // //     console.error('ERROR:', err);
+      // //   });
 
-      console.log('c');
+      // console.log('c');
 
       this.props.navigation.navigate('SongPlayer');
     } catch (err) {
