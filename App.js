@@ -8,6 +8,7 @@ import { StyleSheet,
         Image,
         StatusBar,
         Button,
+        Linking,
         WebView } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { ImagePicker } from 'expo';
@@ -15,8 +16,6 @@ import { StackNavigator } from 'react-navigation';
 import axios from 'axios';
 import qs from 'querystring';
 import Iframe from 'react-iframe';
-
-
 
 import vision from "react-cloud-vision-api";
 vision.init({ auth: 'Basic AIzaSyCHn4oIcmIftU7mEaWtNOXLM7G02wCxOhU'})
@@ -33,24 +32,29 @@ class SongPlayer extends React.Component {
       isPlaying: false,
       image: IMAGE,
 
-      keyword: 'rock',
+      keyword: '',
       playlistUri: '',
       interval: {},
 
-      spotify_token: 'Bearer BQAKreTY8U0BqwLMgIp_4WO_hMTtmX_1Idz6GPFEg2jjBiCPoYNRVyOB5XWHMte-Eq6ErhncfQK22eAcMzAIQQ',
+      time: 5,
+
+      spotify_token: 'Bearer BQCCsslW6gFO8rHDLeFD-6yjD3IIOEh9bjMgkWiEumu98bcjehpYZVANN5czEiB7DU5d1k-svGdn1lwIlgv9Eg',
       spotify_client_id: 'MGIxMWJmMWRkY2FmNGJiNmI5MzY4ODFjZDViYzAzNGI6NmM1YTIwNTE3M2QwNDFjZjkwZTdhNTA1NTc3MzNkNGM'
     };
 
-    this.getSong = this._getSong.bind(this);
-    this.playSong = this._playSong.bind(this);
-    this.pauseSong = this._pauseSong.bind(this);
+    // this.getSong = this._getSong.bind(this);
     this.getUpdatedSpotifyToken = this._getUpdatedSpotifyToken.bind(this);
     this.getPlaylists = this._getPlaylists.bind(this);
+    this.getKeywords = this._getKeywords.bind(this);
+    this.redirectToSpotify = this._redirectToSpotify.bind(this);
   }
 
-  /* BUG CHANGE LATER TO NOT HARD CODE THIS FUNC CALL BUG */
+  static navigationOptions = {
+    title: 'Playlist',
+  }
+
   componentDidMount() {
-    this.getPlaylists();
+    this.getKeywords();
 
     console.log('*******************************');
     this.getUpdatedSpotifyToken();
@@ -86,17 +90,37 @@ class SongPlayer extends React.Component {
       console.log('post req not go through :( ,', err, err.message);
     });
   }
-  /* BUG CHANGE LATER TO NOT HARD CODE ABOVE FUNC CALL BUG */
 
-  _getSong() {
-    console.log("getting song");
 
-    /* BUG CHANGE LATER TO NOT HARD CODE THESE VARS BUG */
-    const title = 'On Top of the World';
-    const artist = 'Imagine Dragons';
-    /* BUG CHANGE LATER TO NOT HARD CODE ABOVE VARS BUG */
+  _getKeywords() {
+    const self = this;
+    const file = this.state.image.replace("file://", "");
+    console.log('in get keywords', this.state.image, 'FILE', file);
+    axios.post('http://127.0.0.1:5000/', {data: this.state.image})
+    .then((res) => {
+      console.log('**** **** **** **** **** ****');
+      console.log('response', res.data);
+      console.log('**** **** **** **** **** ****');
 
-    this.setState({song: { title , artist }})
+    }).catch((e) => {
+      console.log('ERROR: ', e);
+      // if file not work, send in this default pic
+      return axios.post('http://127.0.0.1:5000/', {data: 'pic1.jpg'})
+      .then(res => {
+        console.log('**** **** **** **** **** ****');
+        console.log('response', res.data);
+        console.log('**** **** **** **** **** ****');
+
+        // now set state with descrip and redirect to get playlists
+        const descrip = res.data.substring(0, res.data.indexOf(":")-1).split(" ");
+        self.setState({googleDescrip: descrip});
+        const genre = res.data.substring(res.data.indexOf(':') + 2);
+        self.setState({keyword: genre});
+
+        console.log('end of get keywords', res.data.indexOf(':'),' set state,', self.state.keyword, 'DESCRIP ', self.state.googleDescrip);
+        this.getPlaylists();
+      })
+    })
   }
 
   _getPlaylists() {
@@ -117,31 +141,34 @@ class SongPlayer extends React.Component {
       }
     })
     .then(resp => {
-      console.log('GET REQUEST WENT THROUGH!!', resp.data.playlists.items[0]);
+      console.log('GET REQUEST WENT THROUGH!!', resp.data.playlists.items[2]);
       const defaultPlaylistUri = 'spotify:user:spotify:playlist:37i9dQZF1DXcF6B6QPhFDv';
       const playlist = (resp.data && resp.data.playlists && resp.data.playlists.items) ?
-        resp.data.playlists.items[0] : null;
+        resp.data.playlists.items[2] : null;
 
       let playlistUri = 'http://open.spotify.com/embed?uri=';
-      playlistUri += playlist ? playlist.uri : defaultPlaylistUri;
+      playlistUri += playlist ? playlist.external_urls.spotify : defaultPlaylistUri;
 
       self.setState({playlistUri});
       console.log('set state of playlistUri', self.state.playlistUri);
 
+      // now redirect to spotify
+      this.redirectToSpotify();
     })
     .catch(err => {
       console.log('err, get not go thru ... ', err);
     })
   }
 
-  _playSong() {
-    console.log("playing song!");
-
-  }
-
-  _pauseSong() {
-    console.log("pausing song!");
-
+  _redirectToSpotify () {
+    console.log('in redirect to spotify');
+    const self = this;
+    setTimeout(() => {
+      console.log("redirecting...");
+      Linking.openURL(self.state.playlistUri)
+      // https://open.spotify.com/album/3cyyJALrHc8LawnQNFYRWL
+      .catch(err => console.error('An error occurred', err));
+    }, 5000);
   }
 
   render() {
@@ -149,26 +176,28 @@ class SongPlayer extends React.Component {
     const htmlText = "<iframe id='spotify_embed' src={uri: 'http://open.spotify.com/embed?uri=spotify:user:spotify:playlist:37i9dQZF1DXcF6B6QPhFDv'}> </iframe>";
     const html2 = "<p>hello!</p>";
 
+    let time = 5;
+    if (this.state.googleDescrip) {
+      setInterval(() => {
+        while (this.state.time > 0) {
+          this.setState({time: this.state.time - 1});
+        }
+      })
+    }
+
     return (
       <View style={styles.container}>
         <MyStatusBar backgroundColor="black" barStyle="light-content" />
 
-        <TouchableOpacity onPress={() => this.getPlaylists()}>
-          <Text style={{color: 'white'}}>test</Text>
-        </TouchableOpacity>
-
-        <View>
-          {/* {this.state.playlistUri &&
-             <WebView html={html2} /*src={{uri: 'http://open.spotify.com/embed?uri=spotify:user:spotify:playlist:37i9dQZF1DXcF6B6QPhFDv'}} height="200" width="200"></WebView>
-          */}
-
-          {/* <Iframe url="http://open.spotify.com/embed?uri=spotify:user:spotify:playlist:37i9dQZF1DXcF6B6QPhFDv" width="200" height="200"></Iframe> */}
-
-
-          {/* <CustomFrame></CustomFrame> */}
-
+        {/* song title and info  */}
+        <View style={styles.textcontainer}>
+          <Text style={styles.textArtist}> Detected:
+            {this.state.googleDescrip && this.state.googleDescrip.map((word, i) => {
+                return i!=2 ? ' '+ word + ',' : ' '+word ;
+              }) }
+          </Text>
+          <Text style={styles.textArtist}> queueing up: {this.state.keyword || ''} playlist </Text>
         </View>
-
         {/* image picker and camera  */}
         <View style={styles.imagecontainer}>
           {this.state.image &&
@@ -176,33 +205,9 @@ class SongPlayer extends React.Component {
         </View>
         {/* song title and info  */}
         <View style={styles.textcontainer}>
-          <Text style={styles.textTitle}> {(this.state.song && this.state.song.title) || ''} </Text>
-          <Text style={styles.textArtist}> by {(this.state.song && this.state.song.artist) || ''} </Text>
-        </View>
-        {/* song play/pause buttons  */}
-        <View style={styles.btncontainer}>
-          <TouchableOpacity
-            id="playbtn"
-            onPress={() => this.playSong()}
-            style={styles.btn}>
-              <Icon
-                reverse
-                name='play-arrow'
-                color='rgb(97, 99, 104)'
-                size={15}
-              />
-          </TouchableOpacity>
-          <TouchableOpacity
-            id="pausebtn"
-            onPress={() => this.pauseSong()}
-            style={styles.btn}>
-              <Icon
-                reverse
-                name='pause'
-                color='rgb(97, 99, 104)'
-                size={15}
-              />
-          </TouchableOpacity>
+          <Text style={styles.textqueue}>
+            redirecting in {time} sec ...
+          </Text>
         </View>
       </View>
     );
@@ -214,17 +219,9 @@ class PicPicker extends React.Component {
     super(props);
     this.pickImage = this._pickImage.bind(this);
   }
-  //
-  // componentDidMount() {
-  //   axios.get(`http://api.openweathermap.org/data/2.5/weather?q=LasVegas&units=imperial&APPID=89fdd5afd3758c1feb06e06a64c55260`)
-  //   .then ( data => {
-  //     console.log('axios request worked! ', data);
-  //   })
-  //
-  // }
 
   static navigationOptions = {
-    title: 'PicPicker',
+    title: 'Vibe',
   }
 
   _pickImage = async () => {
@@ -239,42 +236,9 @@ class PicPicker extends React.Component {
       // this.setState({ image: result.uri });
       IMAGE = result.uri;
 
-      // Performs label detection on the image file
-      console.log('a');
-      const req = new vision.Request({
-        image: new vision.Image({
-          base64: result.uri
-        }),
-        features: [
-          new vision.Feature('TEXT_DETECTION', 4),
-          new vision.Feature('LABEL_DETECTION', 10),
-        ]
-      })
+      console.log('set image', result.uri);
 
-      console.log('b', req);
-
-      vision.annotate(req).then((res) => {
-        // handling response
-        console.log('hello');
-        console.log(JSON.stringify(res.responses))
-      }, (e) => {
-        console.log('Error: ', e)
-      })
-
-      // vision.labelDetection(request)
-      //   .then((results) => {
-      //     const labels = results[0].labelAnnotations;
-
-      //     console.log('Labels:');
-      //     labels.forEach((label) => console.log(label.description));
-      //   })
-      //   .catch((err) => {
-      //     console.error('ERROR:', err);
-      //   });
-
-      console.log('c');
-
-      this.props.navigation.navigate('SongPlayer');
+      this.props.navigation.navigate('Playlist');
     } catch (err) {
       console.log('could not load pic: ', err);
 
@@ -287,23 +251,22 @@ class PicPicker extends React.Component {
     return (
       <View style={styles.container}>
          <Button
-          title="Pick an image from camera roll"
+          title="Choose an image..."
           onPress={this._pickImage}
         />
       </View>
     )
   }
-
 }
 
 export default StackNavigator({
-  PicPicker: {
+  Vibe: {
     screen: PicPicker,
   },
-  SongPlayer: {
+  Playlist: {
     screen: SongPlayer,
   },
-}, {initialRouteName: 'SongPlayer'});
+}, {initialRouteName: 'Vibe'});
 
 // LOCAL COMPONENTS AND styles
 
@@ -329,8 +292,10 @@ const styles = StyleSheet.create({
     overflow: 'scroll',
     marginBottom: '5%',
   },
-  text: {
+  queuetext: {
     color: 'grey',
+    fontSize: 18,
+    margin: '2%'
   },
   textTitle: {
     color: 'grey',
@@ -368,7 +333,7 @@ const styles = StyleSheet.create({
     height: STATUSBAR_HEIGHT,
   },
   imagecontainer: {
-    margin: '2%',
+    margin: '5%',
 
     display: 'flex',
     flexDirection: 'column',
@@ -377,3 +342,78 @@ const styles = StyleSheet.create({
   },
 
 });
+
+
+
+/* BUG CHANGE LATER TO NOT HARD CODE ABOVE FUNC CALL BUG */
+
+// _getSong() {
+//   console.log("getting song");
+//
+//   /* BUG CHANGE LATER TO NOT HARD CODE THESE VARS BUG */
+//   const title = 'On Top of the World';
+//   const artist = 'Imagine Dragons';
+//   /* BUG CHANGE LATER TO NOT HARD CODE ABOVE VARS BUG */
+//
+//   this.setState({song: { title , artist }})
+// }
+// Performs label detection on the image file
+// console.log('a');
+// const req = new vision.Request({
+//   image: new vision.Image({
+//     base64: result.uri
+//   }),
+//   features: [
+//     new vision.Feature('TEXT_DETECTION', 4),
+//     new vision.Feature('LABEL_DETECTION', 10),
+//   ]
+// })
+//
+// console.log('b', req);
+//
+// vision.annotate(req).then((res) => {
+//   // handling response
+//   console.log('hello');
+//   console.log(JSON.stringify(res.responses))
+// }, (e) => {
+//   console.log('Error: ', e)
+// })
+//
+// // vision.labelDetection(request)
+// //   .then((results) => {
+// //     const labels = results[0].labelAnnotations;
+//
+// //     console.log('Labels:');
+// //     labels.forEach((label) => console.log(label.description));
+// //   })
+// //   .catch((err) => {
+// //     console.error('ERROR:', err);
+// //   });
+//
+// console.log('c');
+
+/* {/* song play/pause buttons }
+<View style={styles.btncontainer}>
+  <TouchableOpacity
+    id="playbtn"
+    onPress={() => this.playSong()}
+    style={styles.btn}>
+      <Icon
+        reverse
+        name='play-arrow'
+        color='rgb(97, 99, 104)'
+        size={15}
+      />
+  </TouchableOpacity>
+  <TouchableOpacity
+    id="pausebtn"
+    onPress={() => this.pauseSong()}
+    style={styles.btn}>
+      <Icon
+        reverse
+        name='pause'
+        color='rgb(97, 99, 104)'
+        size={15}
+      />
+  </TouchableOpacity>
+*/
