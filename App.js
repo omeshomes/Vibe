@@ -14,6 +14,16 @@ import { ImagePicker } from 'expo';
 import { StackNavigator } from 'react-navigation';
 import axios from 'axios';
 
+import vision from "react-cloud-vision-api";
+vision.init({ auth: 'AIzaSyCHn4oIcmIftU7mEaWtNOXLM7G02wCxOhU'})
+console.log('worked');
+// google.auth.getApplicationDefault(function(err, authClient) {
+//     if (err) {
+//       return cb(err);
+//     }});
+
+// import Axios from 'axios';
+
 let IMAGE = null;
 
 class SongPlayer extends React.Component {
@@ -104,7 +114,7 @@ class SongPlayer extends React.Component {
         {/* image picker and camera  */}
         <View style={styles.imagecontainer}>
           {this.state.image &&
-            <Image source={{ uri: this.state.image }} style={{ width: 200, height: 200 }} />}
+            <Image source={{ uri: IMAGE }} style={{ width: 200, height: 200 }} />}
         </View>
         {/* song title and info  */}
         <View style={styles.textcontainer}>
@@ -144,7 +154,6 @@ class SongPlayer extends React.Component {
 class PicPicker extends React.Component {
   constructor(props) {
     super(props);
-
     this.pickImage = this._pickImage.bind(this);
   }
   //
@@ -155,6 +164,10 @@ class PicPicker extends React.Component {
   //   })
   //
   // }
+
+  static navigationOptions = {
+    title: 'PicPicker',
+  }
 
   _pickImage = async () => {
     let result;
@@ -167,18 +180,55 @@ class PicPicker extends React.Component {
 
       // this.setState({ image: result.uri });
       IMAGE = result.uri;
+
+      // Performs label detection on the image file
+      console.log('a');
+      const req = new vision.Request({
+        image: new vision.Image({
+          base64: result.uri
+        }),
+        features: [
+          new vision.Feature('TEXT_DETECTION', 4),
+          new vision.Feature('LABEL_DETECTION', 10),
+        ]
+      })
+
+      console.log('b', req);
+
+      vision.annotate(req).then((res) => {
+        // handling response
+        console.log('hello');
+        console.log(JSON.stringify(res.responses))
+      }, (e) => {
+        console.log('Error: ', e)
+      })
+
+      // vision.labelDetection(request)
+      //   .then((results) => {
+      //     const labels = results[0].labelAnnotations;
+
+      //     console.log('Labels:');
+      //     labels.forEach((label) => console.log(label.description));
+      //   })
+      //   .catch((err) => {
+      //     console.error('ERROR:', err);
+      //   });
+
+      console.log('c');
+
+      this.props.navigation.navigate('SongPlayer');
     } catch (err) {
       console.log('could not load pic: ', err);
 
     }
 
-    console.log(result);
+    console.log('result', result);
   };
 
   render () {
     return (
       <View style={styles.container}>
-        <Button
+         <Button
           title="Pick an image from camera roll"
           onPress={this._pickImage}
         />
@@ -266,5 +316,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center'
-  }
+  },
+
 });
