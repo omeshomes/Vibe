@@ -292,7 +292,7 @@ const styles = StyleSheet.create({
     overflow: 'scroll',
     marginBottom: '5%',
   },
-  queuetext: {
+  textqueue: {
     color: 'grey',
     fontSize: 18,
     margin: '2%'
