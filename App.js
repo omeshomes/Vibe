@@ -8,11 +8,18 @@ import { StyleSheet,
         Image,
         StatusBar,
         Button,
-        Linking
+        Linking,
+        WebView
         } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { ImagePicker } from 'expo';
 import { StackNavigator } from 'react-navigation';
+import axios from 'axios';
+import qs from 'querystring';
+import Iframe from 'react-iframe';
+
+
+
 
 // import vision from "node-cloud-vision-api";
 // vision.init({ auth: 'AIzaSyCHn4oIcmIftU7mEaWtNOXLM7G02wCxOhU'})
@@ -33,17 +40,60 @@ class SongPlayer extends React.Component {
     this.state = {
       currentSong: {},
       isPlaying: false,
-      image: IMAGE
+      image: IMAGE,
+
+      keyword: 'rock',
+      playlistUri: '',
+      interval: {},
+
+      spotify_token: 'Bearer BQAKreTY8U0BqwLMgIp_4WO_hMTtmX_1Idz6GPFEg2jjBiCPoYNRVyOB5XWHMte-Eq6ErhncfQK22eAcMzAIQQ',
+      spotify_client_id: 'MGIxMWJmMWRkY2FmNGJiNmI5MzY4ODFjZDViYzAzNGI6NmM1YTIwNTE3M2QwNDFjZjkwZTdhNTA1NTc3MzNkNGM'
     };
 
     this.getSong = this._getSong.bind(this);
     this.playSong = this._playSong.bind(this);
     this.pauseSong = this._pauseSong.bind(this);
+    this.getUpdatedSpotifyToken = this._getUpdatedSpotifyToken.bind(this);
+    this.getPlaylists = this._getPlaylists.bind(this);
   }
 
   /* BUG CHANGE LATER TO NOT HARD CODE THIS FUNC CALL BUG */
   componentDidMount() {
-    this.getSong();
+    this.getPlaylists();
+
+    console.log('*******************************');
+    this.getUpdatedSpotifyToken();
+    this.setState({interval: setInterval(() => {
+        this.getUpdatedSpotifyToken();
+      }, 3600 * 1000)
+    });
+
+  }
+
+  _getUpdatedSpotifyToken () {
+    const self = this;
+    const auth_url = 'https://accounts.spotify.com/api/token';
+    console.log('making post request to auth_url', auth_url);
+
+    const data = qs.stringify({ grant_type: 'client_credentials' });
+
+    axios({
+      method: 'post',
+      url: auth_url,
+      headers: {
+        'Authorization': this.state.spotify_client_id,
+        'Content-Type': 'application/x-www-form-urlencoded'
+      },
+      data: data
+    })
+    .then(resp => {
+      console.log('POST REQUEST WENT THROUGH!!', resp);
+      const newDataToken = resp.token_type + ' ' + resp.access_token;
+      self.setState({spotify_token: newDataToken})
+    })
+    .catch(err => {
+      console.log('post req not go through :( ,', err, err.message);
+    });
   }
   /* BUG CHANGE LATER TO NOT HARD CODE ABOVE FUNC CALL BUG */
 
@@ -59,6 +109,41 @@ class SongPlayer extends React.Component {
     this.setState({song: { title , artist }})
   }
 
+  _getPlaylists() {
+    const self = this;
+
+    let url = 'https://api.spotify.com/v1/browse/categories/';
+    url += self.state.keyword + '/playlists';
+
+    console.log('get request url', url);
+
+    axios({
+      method: 'get',
+      url,
+      dataType: 'json',
+      headers: {
+        'Authorization': this.state.spotify_token,
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    })
+    .then(resp => {
+      console.log('GET REQUEST WENT THROUGH!!', resp.data.playlists.items[0]);
+      const defaultPlaylistUri = 'spotify:user:spotify:playlist:37i9dQZF1DXcF6B6QPhFDv';
+      const playlist = (resp.data && resp.data.playlists && resp.data.playlists.items) ?
+        resp.data.playlists.items[0] : null;
+
+      let playlistUri = 'http://open.spotify.com/embed?uri=';
+      playlistUri += playlist ? playlist.uri : defaultPlaylistUri;
+
+      self.setState({playlistUri});
+      console.log('set state of playlistUri', self.state.playlistUri);
+
+    })
+    .catch(err => {
+      console.log('err, get not go thru ... ', err);
+    })
+  }
+
   _playSong() {
     console.log("playing song!");
     Linking.openURL('https://open.spotify.com/album/3cyyJALrHc8LawnQNFYRWL')
@@ -72,12 +157,32 @@ class SongPlayer extends React.Component {
   }
 
   render() {
+    const source = {uri: this.state.playlistUri};
+    const htmlText = "<iframe id='spotify_embed' src={uri: 'http://open.spotify.com/embed?uri=spotify:user:spotify:playlist:37i9dQZF1DXcF6B6QPhFDv'}> </iframe>";
+    const html2 = "<p>hello!</p>";
+
     return (
       <View style={styles.container}>
         <MyStatusBar backgroundColor="black" barStyle="light-content" />
+
+        <TouchableOpacity onPress={() => this.getPlaylists()}>
+          <Text style={{color: 'white'}}>test</Text>
+        </TouchableOpacity>
+
+        <View>
+          {/* {this.state.playlistUri &&
+             <WebView html={html2} /*src={{uri: 'http://open.spotify.com/embed?uri=spotify:user:spotify:playlist:37i9dQZF1DXcF6B6QPhFDv'}} height="200" width="200"></WebView>
+          */}
+
+          {/* <Iframe url="http://open.spotify.com/embed?uri=spotify:user:spotify:playlist:37i9dQZF1DXcF6B6QPhFDv" width="200" height="200"></Iframe> */}
+
+
+          {/* <CustomFrame></CustomFrame> */}
+
+        </View>
+
         {/* image picker and camera  */}
         <View style={styles.imagecontainer}>
-
           {this.state.image &&
             <Image source={{ uri: IMAGE }} style={{ width: 200, height: 200 }} />}
         </View>
@@ -121,6 +226,14 @@ class PicPicker extends React.Component {
     super(props);
     this.pickImage = this._pickImage.bind(this);
   }
+  //
+  // componentDidMount() {
+  //   axios.get(`http://api.openweathermap.org/data/2.5/weather?q=LasVegas&units=imperial&APPID=89fdd5afd3758c1feb06e06a64c55260`)
+  //   .then ( data => {
+  //     console.log('axios request worked! ', data);
+  //   })
+  //
+  // }
 
   static navigationOptions = {
     title: 'PicPicker',
@@ -199,7 +312,7 @@ export default StackNavigator({
   SongPlayer: {
     screen: SongPlayer,
   },
-}, {initialRouteName: 'PicPicker'});
+}, {initialRouteName: 'SongPlayer'});
 
 // LOCAL COMPONENTS AND styles
 
@@ -270,6 +383,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center'
-  }, 
+  },
 
 });
