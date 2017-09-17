@@ -5,10 +5,28 @@
   "author": null,
   "private": true,
   "main": "node_modules/expo/AppEntry.js",
+  "scripts": {
+    "postinstall": "node_modules/.bin/rn-nodeify --install fs --hack"
+  },
   "dependencies": {
+    "@google-cloud/vision": "^0.12.0",
     "expo": "^20.0.0",
+    "fs": "0.0.1-security",
+    "googleapis": "^21.3.0",
+    "node-cloud-vision-api": "^0.2.0",
     "react": "16.0.0-alpha.12",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-20.0.0.tar.gz",
-    "react-native-elements": "^0.16.0"
+    "react-cloud-vision-api": "^0.3.0",
+    "react-native": "^0.47.2",
+    "react-native-elements": "^0.16.0",
+    "react-native-fs": "^2.5.1",
+    "react-native-level-fs": "^3.0.0",
+    "react-navigation": "^1.0.0-beta.11",
+    "rn-nodeify": "^8.0.0"
+  },
+  "react-native": {
+    "fs": "react-native-level-fs"
+  },
+  "browser": {
+    "fs": "react-native-level-fs"
   }
 }
