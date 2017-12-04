@@ -1,4 +1,4 @@
-# hackmit
+# Vibe
 
 A mobile app that curates a musical playlist based on your surrounding environment right now. Input a picture of your surroundings and Vibe recommends music for the moment.
 
